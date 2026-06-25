@@ -16,7 +16,13 @@ export function UploadQueue() {
   const items = useUploadStore((s) => Object.values(s.items));
   const remove = useUploadStore((s) => s.remove);
 
-  if (items.length === 0) return null;
+  if (items.length === 0) {
+    return (
+      <p className="text-text-muted text-sm text-center py-6 border border-dashed border-border-subtle rounded-md">
+        Uploads will appear here once you start one.
+      </p>
+    );
+  }
 
   return (
     <ul className="space-y-3">

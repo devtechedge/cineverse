@@ -5,6 +5,35 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com).
 
 ## [Unreleased]
 
+### Added — Polish round (mobile, a11y, micro-interactions)
+- **Footer** with project links (source, architecture, changelog) and tech-stack callouts
+- **`ScrollToTop`** button — appears after 600 px scroll, fades in
+- **`KeyboardHints`** panel — press `?` anywhere for a shortcut cheatsheet modal
+- **`PageTransition`** — subtle 250ms fade-in on route changes (Framer Motion), respects `prefers-reduced-motion`
+- **`SkipLink`** — keyboard-only "Skip to main content" for screen-reader users (WCAG)
+- **`EmptyState`** component — reusable, used in library zero-results, empty journal, empty upload queue
+- **Mobile filter drawer** on library (right-side slide-in on small screens)
+- **Mobile journal drawer** on watch page (replaces collapsed sidebar with overlay)
+- Loading skeletons: `VideoGridSkeleton`, `HeroSkeleton`, `WatchSkeleton`
+- Open Graph + Twitter card meta tags — proper preview when sharing on LinkedIn/Twitter
+- Custom `icon.svg` favicon (red play triangle on dark square)
+- `docs/screenshots/` folder + capture guide for README screenshots
+- README screenshot section (4 placeholder slots)
+- Forced-colors (high-contrast) mode support
+
+### Changed
+- Hero sections use `100svh` instead of `100vh` — handles mobile browser chrome correctly (no jump when address bar hides)
+- VideoCard: better hover state (translucent play-button background), focus-visible ring for keyboard nav, status badge when not ready
+- Library count display: `"3 of 6 videos (filtered)"`
+- Library "Clear filters" button surfaces when any filter is active
+- Section dot nav is now real `<button>` elements with `aria-current` and per-section labels
+- `prefers-reduced-motion` honored more aggressively (also covers `::before` / `::after` and `scroll-behavior`)
+
+### Fixed
+- Hero section sizes properly on mobile — min-height 560px guarantees content visibility on short screens
+
+## [0.3.0] — Light/dark theme + ambient background
+
 ### Added
 - Light/dark theme toggle in navbar — defaults to light, persisted in `localStorage`, no flash on load
 - Animated ambient gradient background — slow-drifting radial gradients with SVG noise, theme-aware, present on every page

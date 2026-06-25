@@ -11,6 +11,21 @@
 
 ---
 
+## 📸 Screenshots
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/01-hero.png" alt="Cineverse hero — light theme"/></td>
+    <td width="50%"><img src="docs/screenshots/02-hero-dark.png" alt="Cineverse hero — dark theme"/></td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/03-library.png" alt="Library page"/></td>
+    <td><img src="docs/screenshots/04-watch.png" alt="Watch page with journal sidebar"/></td>
+  </tr>
+</table>
+
+> _Don't see images? They're added after deploy — see [`docs/screenshots/README.md`](docs/screenshots/README.md) for the capture guide._
+
 ## ✨ What it does
 
 Cineverse is a personal media platform that lets you upload, archive, annotate, clip, and share your own 4K video — a cinematic alternative to "everything in a camera roll."

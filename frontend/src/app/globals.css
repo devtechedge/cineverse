@@ -130,9 +130,21 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .snap-cinematic { scroll-behavior: auto; }
   .cv-ambient { animation: none; }
-  * {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High-contrast / forced-colors mode */
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 3px solid CanvasText !important;
+    box-shadow: none !important;
   }
 }
 

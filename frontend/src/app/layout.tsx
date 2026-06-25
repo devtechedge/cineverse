@@ -3,11 +3,38 @@ import './globals.css';
 import { Providers } from './providers';
 import { Navbar } from '@/components/Navbar';
 import { DemoBanner } from '@/components/DemoBanner';
+import { Footer } from '@/components/Footer';
+import { SkipLink } from '@/components/SkipLink';
+import { ScrollToTop } from '@/components/ScrollToTop';
+import { KeyboardHints } from '@/components/KeyboardHints';
+import { PageTransition } from '@/components/PageTransition';
 import { Toaster } from 'sonner';
 
+const SITE_URL = 'https://cineverse-fawn-two.vercel.app';
+
 export const metadata: Metadata = {
-  title: 'Cineverse — Your moments, framed.',
-  description: 'Personal 4K video archive, journal & streaming platform.',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: 'Cineverse — Your moments, framed.',
+    template: '%s · Cineverse',
+  },
+  description:
+    'A personal 4K video archive, journal & streaming platform. Built with Next.js 14, FastAPI, PostgreSQL, Redis, ffmpeg, and Docker.',
+  keywords: ['video', 'streaming', 'portfolio', 'nextjs', 'fastapi', 'hls', '4k'],
+  authors: [{ name: 'devtechedge' }],
+  openGraph: {
+    type: 'website',
+    url: SITE_URL,
+    title: 'Cineverse — Your moments, framed.',
+    description: 'Personal 4K video archive, journal & streaming platform. Full-stack portfolio project.',
+    siteName: 'Cineverse',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Cineverse — Your moments, framed.',
+    description: 'Personal 4K video archive, journal & streaming platform.',
+  },
+  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
@@ -19,8 +46,6 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-// Tiny inline script that runs BEFORE React hydration to apply the saved
-// theme (default = light). Prevents a "flash of dark mode" on first paint.
 const themeBootstrap = `
 (function(){
   try {
@@ -39,13 +64,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
       </head>
       <body>
-        {/* Animated ambient gradient — uniform across all pages, adapts to theme */}
         <div className="cv-ambient" aria-hidden="true" />
         <Providers>
+          <SkipLink />
           <DemoBanner />
           <Navbar />
-          <main className="min-h-screen">{children}</main>
-          <Toaster theme="system" position="bottom-right" richColors />
+          <main id="main" className="min-h-screen focus:outline-none" tabIndex={-1}>
+            <PageTransition>{children}</PageTransition>
+          </main>
+          <Footer />
+          <ScrollToTop />
+          <KeyboardHints />
+          <Toaster theme="system" position="bottom-right" richColors closeButton />
         </Providers>
       </body>
     </html>

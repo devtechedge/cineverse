@@ -12,20 +12,25 @@ export function VideoCard({ video }: { video: Video }) {
         ? video.thumbnail_url
         : `${API_BASE_URL}${video.thumbnail_url}`)
     : null;
+
   return (
-    <Link href={`/watch/${video.id}`} className="group block">
+    <Link
+      href={`/watch/${video.id}`}
+      className="group block rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-base"
+      aria-label={`Watch ${video.title}`}
+    >
       <motion.div
         whileHover={{ y: -4 }}
         transition={{ duration: 0.3, ease: [0.2, 0.8, 0.2, 1] }}
-        className="bg-bg-surface rounded-md overflow-hidden border border-border-subtle hover:border-accent/40 hover:shadow-card transition-colors"
+        className="bg-bg-surface rounded-md overflow-hidden border border-border-subtle group-hover:border-accent/40 group-hover:shadow-card transition-colors"
       >
         <div className="relative aspect-video bg-bg-elevated overflow-hidden">
           {thumb ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={thumb}
-              alt={video.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-cinematic"
+              alt=""
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-cinematic motion-reduce:transform-none"
               loading="lazy"
             />
           ) : (
@@ -33,20 +38,29 @@ export function VideoCard({ video }: { video: Video }) {
               {video.status}
             </div>
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-bg-base/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <Play className="text-accent drop-shadow-lg" size={40} />
+            <div className="p-3 rounded-full bg-bg-base/60 backdrop-blur-sm">
+              <Play className="text-accent drop-shadow-lg" size={28} aria-hidden />
+            </div>
           </div>
           {video.duration ? (
-            <span className="absolute bottom-2 right-2 px-1.5 py-0.5 text-[11px] rounded bg-black/70 text-text-primary font-mono">
+            <span className="absolute bottom-2 right-2 px-1.5 py-0.5 text-[11px] rounded bg-black/70 text-white font-mono">
               {formatDuration(video.duration)}
             </span>
           ) : null}
+          {video.status !== 'ready' && (
+            <span className="absolute top-2 left-2 px-1.5 py-0.5 text-[10px] uppercase tracking-wider rounded bg-warning/90 text-white">
+              {video.status}
+            </span>
+          )}
         </div>
         <div className="p-3 space-y-1">
-          <h3 className="text-sm font-medium text-text-primary truncate">{video.title}</h3>
+          <h3 className="text-sm font-medium text-text-primary truncate group-hover:text-accent transition-colors">
+            {video.title}
+          </h3>
           <div className="flex items-center gap-2 text-xs text-text-secondary">
-            <Clock size={12} />
+            <Clock size={12} aria-hidden />
             <time dateTime={video.created_at}>
               {new Date(video.created_at).toLocaleDateString()}
             </time>
