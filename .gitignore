@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.venv*/
+.env
+*.db
+backend/test_cineverse.db
+backend/logs/
+*.egg-info/
+.coverage
+htmlcov/
+
+# Node
+node_modules/
+.next/
+out/
+.npm/
+frontend/.env.local
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Build artefacts
+dist/
+build/
+*.log
+
+# Test artefacts
+test-results/
+playwright-report/
+coverage/
+
+# Local data
+/data/

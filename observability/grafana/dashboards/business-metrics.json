@@ -1,0 +1,42 @@
+{
+  "annotations": { "list": [] },
+  "schemaVersion": 39,
+  "title": "Cineverse — Business metrics",
+  "tags": ["cineverse", "business"],
+  "timezone": "browser",
+  "refresh": "1m",
+  "time": { "from": "now-24h", "to": "now" },
+  "panels": [
+    {
+      "type": "stat",
+      "title": "Uploads today (initiated)",
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "x": 0, "y": 0, "w": 6, "h": 5 },
+      "targets": [{ "expr": "increase(video_uploads_total{status=\"init\"}[24h])" }]
+    },
+    {
+      "type": "stat",
+      "title": "Uploads ready today",
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "x": 6, "y": 0, "w": 6, "h": 5 },
+      "targets": [{ "expr": "increase(video_uploads_total{status=\"ready\"}[24h])" }]
+    },
+    {
+      "type": "stat",
+      "title": "Uploads failed today",
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "x": 12, "y": 0, "w": 6, "h": 5 },
+      "targets": [{ "expr": "increase(video_uploads_total{status=\"failed\"}[24h])" }]
+    },
+    {
+      "type": "timeseries",
+      "title": "Processing duration p50/p95 (s)",
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "x": 0, "y": 5, "w": 24, "h": 8 },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, sum by (le) (rate(video_processing_duration_seconds_bucket[10m])))", "legendFormat": "p50" },
+        { "expr": "histogram_quantile(0.95, sum by (le) (rate(video_processing_duration_seconds_bucket[10m])))", "legendFormat": "p95" }
+      ]
+    }
+  ]
+}
