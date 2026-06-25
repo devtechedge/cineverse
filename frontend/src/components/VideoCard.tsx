@@ -7,7 +7,11 @@ import { formatDuration } from '@/lib/utils';
 import type { Video } from '@/types';
 
 export function VideoCard({ video }: { video: Video }) {
-  const thumb = video.thumbnail_url ? `${API_BASE_URL}${video.thumbnail_url}` : null;
+  const thumb = video.thumbnail_url
+    ? (video.thumbnail_url.startsWith('http') || video.thumbnail_url.startsWith('data:')
+        ? video.thumbnail_url
+        : `${API_BASE_URL}${video.thumbnail_url}`)
+    : null;
   return (
     <Link href={`/watch/${video.id}`} className="group block">
       <motion.div

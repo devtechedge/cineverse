@@ -59,8 +59,14 @@ export default function WatchPage() {
     return <div className="p-12 text-text-secondary">Loading…</div>;
   }
 
-  const src = video.stream_url ? `${API_BASE_URL}${video.stream_url}` : '';
-  const poster = video.thumbnail_url ? `${API_BASE_URL}${video.thumbnail_url}` : undefined;
+  const src = video.stream_url
+    ? (video.stream_url.startsWith('http') ? video.stream_url : `${API_BASE_URL}${video.stream_url}`)
+    : '';
+  const poster = video.thumbnail_url
+    ? (video.thumbnail_url.startsWith('http') || video.thumbnail_url.startsWith('data:')
+        ? video.thumbnail_url
+        : `${API_BASE_URL}${video.thumbnail_url}`)
+    : undefined;
 
   return (
     <div className="max-w-[1440px] mx-auto px-4 sm:px-6 py-6 grid grid-cols-12 gap-6">

@@ -9,6 +9,7 @@ import {
   MOCK_VIDEOS,
   MOCK_JOURNAL,
   MOCK_CLIPS,
+  newUploadDefaults,
   delay,
 } from './mock-data';
 import type {
@@ -214,10 +215,10 @@ export async function mockPost(url: string, body: unknown): Promise<{ data: ApiR
       title: b.title || 'Untitled upload',
       description: b.description ?? 'Uploaded in demo mode — no real file was processed.',
       status: 'ready',
-      duration: 30,
+      duration: 15,
       resolution: '1920x1080',
-      thumbnail_url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerJoyrides.jpg',
-      stream_url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
+      thumbnail_url: newUploadDefaults.thumbnail_url,
+      stream_url: newUploadDefaults.stream_url,
       tags: b.tags ?? [],
       created_at: new Date().toISOString(),
     };
