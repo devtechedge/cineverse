@@ -1,9 +1,17 @@
 name: CD
 
+# This workflow demonstrates a production deploy pipeline (GHCR image build →
+# SSH to VPS → run migrations). It is disabled from auto-running because the
+# demo lives on Vercel, not a VPS.
+#
+# To enable for real production:
+#   1. Provision a VPS with Docker + docker-compose
+#   2. Add repository secrets: VPS_HOST, VPS_USER, VPS_SSH_KEY
+#   3. Change the trigger below back to: push: { branches: [main], tags: ["v*"] }
+
 on:
-  push:
-    branches: [main]
-    tags: ["v*"]
+  # Manual-only trigger — no auto runs on push.
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -48,6 +56,7 @@ jobs:
     needs: build-and-push
     runs-on: ubuntu-latest
     environment: production
+    if: ${{ vars.VPS_HOST != '' }}     # skip cleanly when no VPS configured
     steps:
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3

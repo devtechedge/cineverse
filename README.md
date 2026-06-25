@@ -134,6 +134,16 @@ CI runs everything on every PR — see [`.github/workflows/ci.yml`](.github/work
 
 ---
 
+## 📓 Project journey
+
+Cineverse was built incrementally — every commit on `main` ships a working build. See [`CHANGELOG.md`](CHANGELOG.md) for the full history. Highlights:
+
+- **v0.1.0** — Initial scaffold: full backend, frontend, DevOps, observability, and tests
+- **v0.2.0** — Vercel demo live with mock data layer + auto-login + demo banner
+- **Unreleased** — Light/dark theme system, ambient animated background, hero layout fixes, lazy-loaded HLS bundle, polished video playback
+
+---
+
 ## 📐 Design system
 
 Dark cinematic theme — `#0a0a0a` background, `#1a1a1a` surfaces, `#e50914` accent.
