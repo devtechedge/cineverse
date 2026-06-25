@@ -17,7 +17,7 @@ export function DemoBanner() {
           ships in this repo&apos;s <code className="text-accent">/backend</code> directory.
         </p>
         <a
-          href="https://github.com"
+          href="https://github.com/devtechedge/cineverse"
           target="_blank"
           rel="noreferrer"
           className="hidden sm:inline-flex items-center gap-1 text-xs text-accent hover:underline"
